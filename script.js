@@ -29,45 +29,65 @@ document.addEventListener("DOMContentLoaded", function() {
                 if(storedDataJSON){
                     const storedData=JSON.parse(storedDataJSON);
 
-                    // Create list item to display stored data
-                    const listItem = document.createElement("li");
+                        // Create list item to display stored data
+                        const listItem = document.createElement("li");
 
-                    // Create a container for the "Delete" button and data elements
-                    const container = document.createElement("div");
-
-                    // Create a clickable "Delete" button
-                    const deleteLink = document.createElement("a");
-                    deleteLink.href = "#";
-                    deleteLink.textContent = "Delete";
-                    deleteLink.style.color = "red";
-
-                    // Add a click event listener to the "Delete" link
-                    deleteLink.addEventListener("click", function(e) {
-                        e.preventDefault();
-
-                        // Remove the data from local storage
-                        localStorage.removeItem(key);
-
-                        // Remove the list item from the display
-                        listItem.remove();
-                    });
-
-                    // Append the "Delete" link to the container
-                    container.appendChild(deleteLink);
-
-                    // Create and append data elements to the container
-                    const dataElements = document.createElement("div");
-                    
-                    dataElements.innerHTML = `Name: ${storedData.name}, Email: ${storedData.email}, Phone: ${storedData.phone}, Date: ${storedData.date}, Time: ${storedData.time}`;
-
-                    // Append the data elements to the container
-                    container.appendChild(dataElements);
-
-                    // Append the container to the list item
-                    listItem.appendChild(container);
-
-                    // Append the list item to the display area
-                    displayElement.appendChild(listItem);
+                        // Create a container for the "Edit" and "Delete" buttons, and data elements
+                        const container = document.createElement("div");
+    
+                        // Create an "Edit" button
+                        const editButton = document.createElement("button");
+                        editButton.textContent = "Edit";
+                        editButton.style.color = "blue";
+    
+                        // Add a click event listener to the "Edit" button
+                        editButton.addEventListener("click", function() {
+                            // Copy data to input fields
+                            document.getElementById("name").value = storedData.name;
+                            document.getElementById("email").value = storedData.email;
+                            document.getElementById("Phone").value = storedData.phone;
+                            document.getElementById("date").value = storedData.date;
+                            document.getElementById("time").value = storedData.time;
+    
+                            // Remove the data from local storage
+                            localStorage.removeItem(key);
+    
+                            // Remove the list item from the display
+                            listItem.remove();
+                        });
+    
+                        // Append the "Edit" button to the container
+                        container.appendChild(editButton);
+    
+                        // Create a "Delete" button
+                        const deleteButton = document.createElement("button");
+                        deleteButton.textContent = "Delete";
+                        deleteButton.style.color = "red";
+    
+                        // Add a click event listener to the "Delete" button
+                        deleteButton.addEventListener("click", function() {
+                            // Remove the data from local storage
+                            localStorage.removeItem(key);
+    
+                            // Remove the list item from the display
+                            listItem.remove();
+                        });
+    
+                        // Append the "Delete" button to the container
+                        container.appendChild(deleteButton);
+    
+                        // Create and append data elements to the container
+                        const dataElements = document.createElement("div");
+                        dataElements.innerHTML = `Name: ${storedData.name}, Email: ${storedData.email}, Phone: ${storedData.phone}, Date: ${storedData.date}, Time: ${storedData.time}`;
+    
+                        // Append the data elements to the container
+                        container.appendChild(dataElements);
+    
+                        // Append the container to the list item
+                        listItem.appendChild(container);
+    
+                        // Append the list item to the display area
+                        displayElement.appendChild(listItem);
                     // // const userDataDiv=document.createElement("li");
                     
                     // // const deleteButton = document.createElement("input");
