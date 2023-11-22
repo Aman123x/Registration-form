@@ -75,10 +75,19 @@ document.addEventListener("DOMContentLoaded", function () {
             time: time
         };
 
+        axios.get("https://crudcrud.com/api/5a3340ffeff9480e983d9e4dc37a3fc1/appointmentData")
+        .then((response)=>{
+            //console.log(response.data);
+            for(let i=0;i<response.data.length;i++){
+                const storedData = response.data[i];
+                displayStoredData(storedData);
+            }
+        })
+
         axios.post("https://crudcrud.com/api/5a3340ffeff9480e983d9e4dc37a3fc1/appointmentData", formData)
             .then((response) => {
-                const storedData = response.data;
-                displayStoredData(storedData);
+                // const storedData = response.data;
+                // displayStoredData(storedData);
             })
             .catch((err) => {
                 console.log(err);

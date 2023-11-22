@@ -18,14 +18,14 @@
 //=====================================================
 
 document.addEventListener("DOMContentLoaded", function() {
-    function displayStoredData(storedDataa){
+    function displayStoredData(){
         const displayElement=document.getElementById("displayData");
         //displayElement.innerHTML="";
     
-        for(let i=0;i<storedDataa.length;i++){
-            const key=storedDataa.key(i);
+        for(let i=0;i<localStorage.length;i++){
+            const key=localStorage.key(i);
             if(key.startsWith("formData_")){
-                const storedDataJSON= storedDataa.getItem(key);
+                const storedDataJSON= localStorage.getItem(key);
                 if(storedDataJSON){
                     const storedData=JSON.parse(storedDataJSON);
 
@@ -88,6 +88,38 @@ document.addEventListener("DOMContentLoaded", function() {
     
                         // Append the list item to the display area
                         displayElement.appendChild(listItem);
+                    
+                    
+                    // // const deleteButton = document.createElement("input");
+                    // // deleteButton.type = "button";
+                    // // deleteButton.value = "Delete";
+                    // // deleteButton.style.backgroundColor="red";
+
+                    // // Create a container for data and the "Delete" button
+                    // const dataContainer = document.createElement("div");
+
+                    // // Create a "Delete" button
+                    // const deleteButton = document.createElement("input");
+                    // deleteButton.type = "button";
+                    // deleteButton.value = "Delete";
+                    // deleteButton.style.backgroundColor = "red";
+
+                    //  // Append the "Delete" button to the data container
+                    //  dataContainer.appendChild(deleteButton);
+
+                    //  // Create and append data elements to the data container
+                    //  const dataElements = document.createElement("div");
+
+                    //  // Append the data elements to the data container
+                    // dataContainer.appendChild(dataElements);
+
+                    // // Append the data container to the list item
+                    // userDataDiv.appendChild(dataContainer);
+
+                    // displayElement.appendChild(userDataDiv);
+
+                    // userDataDiv.innerHTML=`Name:${storedData.name} Email: ${storedData.email}  Phone: ${storedData.phone} Date: ${storedData.date} Time: ${storedData.time}`;
+                    // displayElement.appendChild(userDataDiv);
                 }
             }
         }
@@ -116,8 +148,7 @@ document.addEventListener("DOMContentLoaded", function() {
         axios.post("https://crudcrud.com/api/5a3340ffeff9480e983d9e4dc37a3fc1/appointmentData",formData)
             .then((response)=>{
                 //console.log(response);
-                const storedDataa = response.data;
-                displayStoredData(storedDataa);
+                displayStoredData(response.data);
             })
             .catch((err)=>{
                 console.log(err);
